@@ -12,10 +12,21 @@ const selectById = (id) => {
 }
 
 //insertData
-const insert = (itemToInsert) => {
-  return data.push(itemToInsert)
+// const insert = (itemToInsert) => {
+//   return data.push(itemToInsert)
 
-  //return itemToInsert
+//   //return itemToInsert
+// }
+
+function ItemToInsert(name, photo, subtitle, about, phrase, history, addedBy) {
+  this.id = helpers.newId;
+  this.name = name;
+  this.photo = photo;
+  this.subtitle = subtitle;
+  this.about = about;
+  this.phrase = phrase;
+  this.history = history;
+  this.addedBy = addedBy; 
 }
 
 //updateData
@@ -40,7 +51,7 @@ const deleteItem = (id) => {
 module.exports = {
   selectAll,
   selectById,
-  insert,
+  ItemToInsert,
   update,
   deleteItem
 }
