@@ -1,7 +1,7 @@
 const data = require('../data/data.json')
 
 //selectAll
-const selectAll = () => data
+const selectAll = data
 
 //selectById
 const selectById = (id) => {
@@ -12,9 +12,9 @@ const selectById = (id) => {
 
 //insertData
 const insert = (itemToInsert) => {
-  data.push(itemToInsert)
+  return data.push(itemToInsert)
 
-  return itemToInsert
+  //return itemToInsert
 }
 
 //updateData
