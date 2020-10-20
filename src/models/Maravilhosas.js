@@ -26,7 +26,11 @@ function ItemToInsert(name, photo, subtitle, about, phrase, history, addedBy) {
   this.about = about;
   this.phrase = phrase;
   this.history = history;
-  this.addedBy = addedBy; 
+  this.addedBy = addedBy;
+  
+  pushItem = function() {
+    data.push(ItemToInsert)
+  }
 }
 
 //updateData
