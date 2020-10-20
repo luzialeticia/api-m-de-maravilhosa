@@ -1,7 +1,7 @@
 const data = require('../data/data.json')
 
 //selectAll
-const select = () => data
+const selectAll = () => data
 
 //selectById
 const selectById = (id) => {
@@ -37,7 +37,7 @@ const deleteItem = (id) => {
 }
 
 module.exports = {
-  select,
+  selectAll,
   selectById,
   insert,
   update,
