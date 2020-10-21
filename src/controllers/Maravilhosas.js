@@ -1,4 +1,6 @@
+const { ItemToInsert } = require('../models/Maravilhosas')
 const model = require('../models/Maravilhosas')
+const helpers = require('../helpers/Maravilhosas')
 
 //get
 const getAll = (req, res) => {
@@ -20,10 +22,14 @@ const getById = (req, res) => {
 const create = (req, res) => {
   const { name, photo, subtitle, about, phrase, history, addedBy } = req.body
 
-  if(!name || !photo || !subtitle || !about || !phrase || !history || !addedBy) {
-    res.status(400).send('Incompleto')
-  }
+  // let item = new ItemToInsert(name, photo, subtitle, about, phrase, history, addedBy)
+  // item.pushItem
+
+  // if(!name || !photo || !subtitle || !about || !phrase || !history || !addedBy) {
+  //   res.status(400).send('Incompleto')
+  // }
   const item = {
+    id: helpers.newId(),
     name: name,
     photo: photo,
     subtitle: subtitle,
@@ -34,7 +40,9 @@ const create = (req, res) => {
   }
 
   model.insert(item)
+  // console.log(item instanceof ItemToInsert);
 
+  console.log(item);
   return res.status(200).json(item)
 }
 

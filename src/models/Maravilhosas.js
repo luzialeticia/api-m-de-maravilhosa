@@ -1,5 +1,4 @@
 const data = require('../data/data.json')
-const helpers = require('../helpers/Maravilhosas')
 
 //selectAll
 const selectAll = data
@@ -12,26 +11,24 @@ const selectById = (id) => {
 }
 
 //insertData
-// const insert = (itemToInsert) => {
-//   return data.push(itemToInsert)
-
-//   //return itemToInsert
-// }
-
-function ItemToInsert(name, photo, subtitle, about, phrase, history, addedBy) {
-  this.id = helpers.newId;
-  this.name = name;
-  this.photo = photo;
-  this.subtitle = subtitle;
-  this.about = about;
-  this.phrase = phrase;
-  this.history = history;
-  this.addedBy = addedBy;
-  
-  pushItem = function() {
-    data.push(ItemToInsert)
-  }
+const insert = (itemToInsert) => {
+  return data.push(itemToInsert)
 }
+
+// function ItemToInsert(name, photo, subtitle, about, phrase, history, addedBy) {
+//   this.id = helpers.newId;
+//   this.name = name;
+//   this.photo = photo;
+//   this.subtitle = subtitle;
+//   this.about = about;
+//   this.phrase = phrase;
+//   this.history = history;
+//   this.addedBy = addedBy;
+
+//   pushItem = function() {
+//     data.push(ItemToInsert)
+//   }
+// }
 
 //updateData
 const update = (id, itemUpdated) => {
@@ -55,7 +52,7 @@ const deleteItem = (id) => {
 module.exports = {
   selectAll,
   selectById,
-  ItemToInsert,
+  insert,
   update,
   deleteItem
 }
