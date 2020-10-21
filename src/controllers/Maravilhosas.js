@@ -22,28 +22,25 @@ const getById = (req, res) => {
 const create = (req, res) => {
   const { name, photo, subtitle, about, phrase, history, addedBy } = req.body
 
-  // let item = new ItemToInsert(name, photo, subtitle, about, phrase, history, addedBy)
-  // item.pushItem
-
-  // if(!name || !photo || !subtitle || !about || !phrase || !history || !addedBy) {
-  //   res.status(400).send('Incompleto')
-  // }
-  const item = {
-    id: helpers.newId(),
-    name: name,
-    photo: photo,
-    subtitle: subtitle,
-    about: about,
-    phrase: phrase,
-    history: history,
-    addedBy: addedBy
+  if(name && photo && subtitle && about && phrase && history && addedBy) {
+    const item = {
+      id: helpers.newId(),
+      name: name,
+      photo: photo,
+      subtitle: subtitle,
+      about: about,
+      phrase: phrase,
+      history: history,
+      addedBy: addedBy
+    }
+  
+    model.insert(item)
+  
+    console.log(item);
+    return res.status(200).json(item)
+  } else {
+    return res.status(400).send('Incompleto')
   }
-
-  model.insert(item)
-  // console.log(item instanceof ItemToInsert);
-
-  console.log(item);
-  return res.status(200).json(item)
 }
 
 module.exports = {

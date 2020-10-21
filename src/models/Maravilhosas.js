@@ -15,21 +15,6 @@ const insert = (itemToInsert) => {
   return data.push(itemToInsert)
 }
 
-// function ItemToInsert(name, photo, subtitle, about, phrase, history, addedBy) {
-//   this.id = helpers.newId;
-//   this.name = name;
-//   this.photo = photo;
-//   this.subtitle = subtitle;
-//   this.about = about;
-//   this.phrase = phrase;
-//   this.history = history;
-//   this.addedBy = addedBy;
-
-//   pushItem = function() {
-//     data.push(ItemToInsert)
-//   }
-// }
-
 //updateData
 const update = (id, itemUpdated) => {
   const maravilhosaToUpdate = data.find(maravilhosa => maravilhosa.id == id)
