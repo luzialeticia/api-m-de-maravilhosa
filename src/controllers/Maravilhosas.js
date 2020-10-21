@@ -1,4 +1,3 @@
-const { ItemToInsert } = require('../models/Maravilhosas')
 const model = require('../models/Maravilhosas')
 const helpers = require('../helpers/Maravilhosas')
 
@@ -36,7 +35,6 @@ const create = (req, res) => {
   
     model.insert(item)
   
-    console.log(item);
     return res.status(200).json(item)
   } else {
     return res.status(400).send('Incompleto')
