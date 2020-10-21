@@ -17,11 +17,14 @@ const insert = (itemToInsert) => {
 
 //updateData
 const update = (id, itemUpdated) => {
-  const maravilhosaToUpdate = data.find(maravilhosa => maravilhosa.id == id)
+  const maravilhosaToUpdate = data.map(maravilhosa => maravilhosa.id)
+  const maravilhosaId = maravilhosaToUpdate.indexOf(id)
 
-  data.splice(maravilhosaToUpdate, 1, itemUpdated)
+  const maravilhosaUpdated = { id, ...itemUpdated }
 
-  return itemUpdated
+  data.splice(maravilhosaId, 1, maravilhosaUpdated)
+
+  return maravilhosaUpdated
 }
 
 //deleteDate

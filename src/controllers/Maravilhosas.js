@@ -41,8 +41,24 @@ const create = (req, res) => {
   }
 }
 
+//put
+const update = (req, res) => {
+  const itemUpdated = req.body
+  const id = parseInt(req.params.id)
+
+  if(id) {
+    if(itemUpdated) {
+      const maravilhosa = model.update(id, itemUpdated)
+      return res.status(200).json(maravilhosa)
+    }
+    return res.status(404).send('Incompleto')
+  }
+  return res.status(400).send('Não encontrado')
+}
+
 module.exports = {
   getAll,
   getById,
-  create
+  create,
+  update
 }
