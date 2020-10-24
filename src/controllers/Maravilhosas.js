@@ -21,8 +21,14 @@ const getById = (req, res) => {
 const create = (req, res) => {
   const { name, photo, subtitle, about, phrase, history, addedBy } = req.body
 
-  if(name && photo && subtitle && about && phrase && history && addedBy) {
-    const item = {
+  if(name === undefined || photo === undefined || subtitle === undefined || about === undefined || phrase === undefined ||
+    history === undefined || addedBy === undefined) {
+    
+    return res.status(400).send('Incompleto.')
+    
+  } else {
+    
+    const newMaravilhosa = {
       id: helpers.newId(),
       name: name,
       photo: photo,
@@ -32,27 +38,33 @@ const create = (req, res) => {
       history: history,
       addedBy: addedBy
     }
-  
-    model.insert(item)
-  
-    return res.status(200).json(item)
-  } else {
-    return res.status(400).send('Incompleto')
+
+    const repeatedMaravilhosa = model.insert(newMaravilhosa)
+
+    if(repeatedMaravilhosa === null) {
+
+      return res.status(400).send('Maravilhosa já cadastrada.')
+    }
+    
+    return res.status(200).json(newMaravilhosa)
   }
 }
 
 //put
 const update = (req, res) => {
-  const itemUpdated = req.body
+  const maravilhosaUpdated = req.body
   const id = parseInt(req.params.id)
 
   if(id) {
-    if(itemUpdated) {
-      const maravilhosa = model.update(id, itemUpdated)
+    if(maravilhosaUpdated) {
+
+      const maravilhosa = model.update(id, maravilhosaUpdated)
       return res.status(200).json(maravilhosa)
     }
+
     return res.status(404).send('Incompleto')
   }
+  
   return res.status(400).send('Não encontrado')
 }
 

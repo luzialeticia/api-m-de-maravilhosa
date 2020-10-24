@@ -12,6 +12,15 @@ const selectById = (id) => {
 
 //insertData
 const insert = (itemToInsert) => {
+  const searchName = data.find(maravilhosa => maravilhosa.name == itemToInsert.name)
+
+  if(searchName) {
+    return null
+
+  } else {
+    (itemToInsert.name)
+    
+  }
   return data.push(itemToInsert)
 }
 
