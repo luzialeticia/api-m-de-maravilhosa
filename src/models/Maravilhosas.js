@@ -19,21 +19,28 @@ const insert = (itemToInsert) => {
 
   } else {
     (itemToInsert.name)
-    
+
   }
   return data.push(itemToInsert)
 }
 
 //updateData
 const update = (id, itemUpdated) => {
-  const maravilhosaToUpdate = data.map(maravilhosa => maravilhosa.id)
-  const maravilhosaId = maravilhosaToUpdate.indexOf(id)
+  const searchMaravilhosa = data.find(maravilhosa => maravilhosa.id == id)
 
-  const maravilhosaUpdated = { id, ...itemUpdated }
+  if(searchMaravilhosa) {
+    const maravilhosaToUpdate = data.map(maravilhosa => maravilhosa.id)
 
-  data.splice(maravilhosaId, 1, maravilhosaUpdated)
+    const maravilhosaId = maravilhosaToUpdate.indexOf(id)
 
-  return maravilhosaUpdated
+    const maravilhosaUpdated = { id, ...itemUpdated }
+
+    data.splice(maravilhosaId, 1, maravilhosaUpdated)
+
+    return maravilhosaUpdated
+  }
+  
+  return null
 }
 
 //deleteDate

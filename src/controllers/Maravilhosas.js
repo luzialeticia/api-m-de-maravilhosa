@@ -56,16 +56,16 @@ const update = (req, res) => {
   const id = parseInt(req.params.id)
 
   if(id) {
-    if(maravilhosaUpdated) {
+    const maravilhosa = model.update(id, maravilhosaUpdated)
 
-      const maravilhosa = model.update(id, maravilhosaUpdated)
+    if(maravilhosa === null) {
+      return res.status(400).send('ID não encontrado.')
+
+    } else {
       return res.status(200).json(maravilhosa)
-    }
 
-    return res.status(404).send('Incompleto')
+    }
   }
-  
-  return res.status(400).send('Não encontrado')
 }
 
 module.exports = {
