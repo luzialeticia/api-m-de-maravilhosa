@@ -1,13 +1,18 @@
 const data = require('../data/data.json')
+const fs = require('fs')
 
 //selectAll
-const selectAll = data
+const selectAll = () => data
 
 //selectById
 const selectById = (id) => {
-  const maravilhosa = data.find(maravilhosa => maravilhosa.id == id)
+  const searchMaravilhosa = data.find(maravilhosa => maravilhosa.id == id)
 
-  return maravilhosa
+  if(searchMaravilhosa) {
+    return searchMaravilhosa
+  }
+  return null
+  
 }
 
 //insertData
@@ -18,7 +23,7 @@ const insert = (itemToInsert) => {
     return null
 
   } else {
-    data.push(itemToInsert)
+    fs.writeFileSync('./src/data/data.json', JSON.stringify([...data, itemToInsert]), 'utf8')
 
     return itemToInsert
   }
@@ -28,28 +33,31 @@ const insert = (itemToInsert) => {
 const update = (id, itemUpdated) => {
   const searchMaravilhosa = data.find(maravilhosa => maravilhosa.id == id)
 
-  if(searchMaravilhosa) {
-    const maravilhosaToUpdate = data.map(maravilhosa => maravilhosa.id)
+  if(!searchMaravilhosa) {
 
-    const maravilhosaId = maravilhosaToUpdate.indexOf(id)
-
-    const maravilhosaUpdated = { id, ...itemUpdated }
-
-    data.splice(maravilhosaId, 1, maravilhosaUpdated)
-
-    return maravilhosaUpdated
+    return null
   }
-  
-  return null
+  const maravilhosaToUpdate = data.map(maravilhosa => maravilhosa.id)
+
+  const maravilhosaId = maravilhosaToUpdate.indexOf(id)
+
+  const maravilhosaUpdated = { id, ...itemUpdated }
+
+  data.splice(maravilhosaId, 1, maravilhosaUpdated)
+  fs.writeFileSync('./src/data/data.json', JSON.stringify(data), 'utf8')
+
+  return maravilhosaUpdated
 }
 
 //deleteDate
 const deleteItem = (id) => {
-  const itemToDelete = data.find(maravilhosa => maravilhosa.id == id)
+  const maravilhosaToDelete = data.find(maravilhosa => maravilhosa.id == id)
 
-  if(itemToDelete) {
-    const index = data.indexOf(itemToDelete)
+  if(maravilhosaToDelete) {
+    const index = data.indexOf(maravilhosaToDelete)
     data.splice(index, 1)
+
+    fs.writeFileSync('./src/data/data.json', JSON.stringify(data), 'utf8')
 
     return data
   } else {

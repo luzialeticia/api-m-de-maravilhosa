@@ -3,12 +3,12 @@ const helpers = require('../helpers/Maravilhosas')
 
 //get
 const getAll = (req, res) => {
-  res.status(200).json(model.selectAll)
+  res.status(200).json(model.selectAll())
 }
 
 //getById
 const getById = (req, res) => {
-  const { id } = req.params
+  const id = parseInt(req.params.id)
   const findId = model.selectById(id)
 
   if(!findId) {
@@ -34,9 +34,9 @@ const create = (req, res) => {
       addedBy: addedBy
     }
   
-    const repeatedMaravilhosa = model.insert(newMaravilhosa)
+    const insertMaravilhosa = model.insert(newMaravilhosa)
   
-    if(repeatedMaravilhosa === null) {
+    if(insertMaravilhosa === null) {
   
       return res.status(400).send('Maravilhosa já cadastrada.')
     }
@@ -51,33 +51,24 @@ const create = (req, res) => {
 
 //put
 const update = (req, res) => {
-  let maravilhosaUpdated = req.body
+  const maravilhosaUpdated = req.body
   const id = parseInt(req.params.id)
 
-  if(id) {
-    const maravilhosa = model.update(id, maravilhosaUpdated)
+  const updateMaravilhosa = model.update(id, maravilhosaUpdated)
 
-    if(maravilhosa === null) {
-      return res.status(400).send('ID não encontrado.')
+  if(updateMaravilhosa === null) {
+    return res.status(400).send('ID não encontrado.')
+
+  } else {
+    
+    if(maravilhosaUpdated.name && maravilhosaUpdated.photo && maravilhosaUpdated.subtitle && maravilhosaUpdated.about &&
+      maravilhosaUpdated.phrase && maravilhosaUpdated.history && maravilhosaUpdated.addedBy) {
+          
+      return res.status(200).json(updateMaravilhosa)
 
     } else {
-      if(maravilhosaUpdated.name && maravilhosaUpdated.photo && maravilhosaUpdated.subtitle && maravilhosaUpdated.about &&
-        maravilhosaUpdated.phrase && maravilhosaUpdated.history && maravilhosaUpdated.addedBy) {
 
-          // maravilhosaUpdated = {
-          //   id: helpers.newId(),
-          //   name: name,
-          //   photo: photo,
-          //   subtitle: subtitle,
-          //   about: about,
-          //   phrase: phrase,
-          //   history: history,
-          //   addedBy: addedBy
-          // }
-          return res.status(200).json(maravilhosaUpdated)
-      } else {
-        return res.status(404).send('Incompleto.')
-      }
+      return res.status(404).send('Incompleto.')
     }
   }
 }
@@ -89,8 +80,10 @@ const deleteMaravilhosa = (req, res) => {
 
   if(maravilhosa === null) {
     return res.status(400).send('Maravilhosa não encontrada.')
+
   } else {
-    return res.status(202).json('Maravilhosa deletada comsucesso.')
+    
+    return res.status(202).json('Maravilhosa deletada com sucesso.')
   }
   
 }
