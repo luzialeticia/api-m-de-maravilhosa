@@ -18,10 +18,9 @@ const insert = (itemToInsert) => {
     return null
 
   } else {
-    (itemToInsert.name)
 
+    return data.push(itemToInsert)
   }
-  return data.push(itemToInsert)
 }
 
 //updateData

@@ -21,13 +21,8 @@ const getById = (req, res) => {
 const create = (req, res) => {
   const { name, photo, subtitle, about, phrase, history, addedBy } = req.body
 
-  if(name === undefined || photo === undefined || subtitle === undefined || about === undefined || phrase === undefined ||
-    history === undefined || addedBy === undefined) {
-    
-    return res.status(400).send('Incompleto.')
-    
-  } else {
-    
+  if(name && photo && subtitle && about && phrase && history && addedBy) {
+
     const newMaravilhosa = {
       id: helpers.newId(),
       name: name,
@@ -38,15 +33,19 @@ const create = (req, res) => {
       history: history,
       addedBy: addedBy
     }
-
+  
     const repeatedMaravilhosa = model.insert(newMaravilhosa)
-
+  
     if(repeatedMaravilhosa === null) {
-
+  
       return res.status(400).send('Maravilhosa já cadastrada.')
     }
-    
+      
     return res.status(200).json(newMaravilhosa)
+    
+  } else {
+
+    return res.status(400).send('Incompleto.')
   }
 }
 
