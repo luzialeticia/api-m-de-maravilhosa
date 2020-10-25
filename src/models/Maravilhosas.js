@@ -46,11 +46,15 @@ const update = (id, itemUpdated) => {
 //deleteDate
 const deleteItem = (id) => {
   const itemToDelete = data.find(maravilhosa => maravilhosa.id == id)
-  const index = data.indexOf(itemToDelete)
 
-  data.splice(index, 1)
+  if(itemToDelete) {
+    const index = data.indexOf(itemToDelete)
+    data.splice(index, 1)
 
-  return data
+    return data
+  } else {
+    return null
+  }
 }
 
 module.exports = {

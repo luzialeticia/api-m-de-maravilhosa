@@ -63,14 +63,27 @@ const update = (req, res) => {
 
     } else {
       return res.status(200).json(maravilhosa)
-
     }
   }
+}
+
+//delete
+const deleteMaravilhosa = (req, res) => {
+  const id = parseInt(req.params.id)
+  const maravilhosa = model.deleteItem(id)
+
+  if(maravilhosa === null) {
+    return res.status(400).send('Maravilhosa não encontrada.')
+  } else {
+    return res.status(202).json('Maravilhosa deletada comsucesso.')
+  }
+  
 }
 
 module.exports = {
   getAll,
   getById,
   create,
-  update
+  update,
+  deleteMaravilhosa
 }
