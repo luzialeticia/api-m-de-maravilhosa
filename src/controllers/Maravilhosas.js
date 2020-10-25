@@ -51,7 +51,7 @@ const create = (req, res) => {
 
 //put
 const update = (req, res) => {
-  const maravilhosaUpdated = req.body
+  let maravilhosaUpdated = req.body
   const id = parseInt(req.params.id)
 
   if(id) {
@@ -61,7 +61,23 @@ const update = (req, res) => {
       return res.status(400).send('ID não encontrado.')
 
     } else {
-      return res.status(200).json(maravilhosa)
+      if(maravilhosaUpdated.name && maravilhosaUpdated.photo && maravilhosaUpdated.subtitle && maravilhosaUpdated.about &&
+        maravilhosaUpdated.phrase && maravilhosaUpdated.history && maravilhosaUpdated.addedBy) {
+
+          // maravilhosaUpdated = {
+          //   id: helpers.newId(),
+          //   name: name,
+          //   photo: photo,
+          //   subtitle: subtitle,
+          //   about: about,
+          //   phrase: phrase,
+          //   history: history,
+          //   addedBy: addedBy
+          // }
+          return res.status(200).json(maravilhosaUpdated)
+      } else {
+        return res.status(404).send('Incompleto.')
+      }
     }
   }
 }
