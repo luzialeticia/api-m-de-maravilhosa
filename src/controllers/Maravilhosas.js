@@ -51,20 +51,18 @@ const create = (req, res) => {
 
 //put
 const update = (req, res) => {
-  const maravilhosaUpdated = req.body
+  const { name, photo, subtitle, about, phrase, history, addedBy } = req.body
   const id = parseInt(req.params.id)
 
-  const updateMaravilhosa = model.update(id, maravilhosaUpdated)
+  const updateMaravilhosa = model.update(id, {...res.body})
 
   if(updateMaravilhosa === null) {
     return res.status(400).send('ID não encontrado.')
 
   } else {
-    
-    if(maravilhosaUpdated.name && maravilhosaUpdated.photo && maravilhosaUpdated.subtitle && maravilhosaUpdated.about &&
-      maravilhosaUpdated.phrase && maravilhosaUpdated.history && maravilhosaUpdated.addedBy) {
-          
-      return res.status(200).json(updateMaravilhosa)
+
+      if(name && photo && subtitle && about && phrase && history && addedBy) {    
+        return res.status(200).json(updateMaravilhosa)
 
     } else {
 
